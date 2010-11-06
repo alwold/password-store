@@ -6,7 +6,7 @@ package com.alwold.password;
  */
 public class PasswordStoreFactory {
 	public static PasswordStore getPasswordStore() {
-		return new OsXKeychainPasswordStore();
+		return new PasswordSafePasswordStore();
 	}
 
 }
