@@ -12,7 +12,14 @@ import org.apache.commons.exec.PumpStreamHandler;
  * @author alwold
  */
 public class OsXKeychainPasswordStore implements PasswordStore {
-	private String keychainName = "jetty.keychain";
+	private String keychainName;
+
+	public OsXKeychainPasswordStore() {
+		this.keychainName = "jetty.keychain";
+	}
+	public OsXKeychainPasswordStore(String storeLocation) {
+		this.keychainName = storeLocation;
+	}
 
 	public String getPassword(String account, String service) throws PasswordStoreException {
 		CommandLine cmd = new CommandLine("security");
