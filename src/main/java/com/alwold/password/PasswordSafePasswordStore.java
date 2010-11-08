@@ -43,11 +43,11 @@ public class PasswordSafePasswordStore implements PasswordStore {
 		try {
 			StringBuilder sb = new StringBuilder();
 			if (masterPassword == null) {
-				JPasswordField field = new JPasswordField(20);
+				final JPasswordField field = new JPasswordField(20);
 				JPanel panel = new JPanel();
-				panel.add(new JLabel("Password: "));
+				panel.add(new JLabel("Password:"));
 				panel.add(field);
-				if (JOptionPane.showConfirmDialog(null, panel, "PasswordSafe login", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, new Icon() {
+				JOptionPane optionPane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, new Icon() {
 
 					public void paintIcon(Component cmpnt, Graphics grphcs, int i, int i1) {}
 
@@ -58,7 +58,14 @@ public class PasswordSafePasswordStore implements PasswordStore {
 					public int getIconHeight() {
 						return 0;
 					}
-				}) < 0) {
+				}) {
+					@Override
+					public void selectInitialValue() {
+						field.requestFocusInWindow();
+					}
+				};
+				optionPane.createDialog(null, "PasswordSafe login").setVisible(true);
+				if ((Integer) optionPane.getValue() < 0) {
 					throw new PasswordStoreException("No password entered");
 				} else {
 					masterPassword = new String(field.getPassword());
