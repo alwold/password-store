@@ -34,6 +34,10 @@ public class PasswordStoreDataSource implements DataSource {
 		dataSourceParams.put("URL", url);
 	}
 
+	public void setUrl(String url) {
+		dataSourceParams.put("url", url);
+	}
+
 	public void setUser(String user) {
 		dataSourceParams.put("user", user);
 	}
