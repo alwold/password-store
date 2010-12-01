@@ -28,14 +28,14 @@ public class PasswordStoreDriver implements Driver {
 	public Connection connect(String url, Properties info) throws SQLException {
 		url = url.replace(":pwstore:", ":");
 		try {
+			// TODO replace the password value in info with the real password
 			return ((Driver) Class.forName(info.getProperty("realDriver")).newInstance()).connect(url, info);
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
-						throw new RuntimeException(e);
-
+			throw new RuntimeException(e);
 		}
 	}
 
