@@ -21,11 +21,14 @@
 	</build>
 	<distributionManagement>
 		<repository>
-			<id>gibson</id>
-			<url>scp://gibson.asu.edu/var/www/maven</url>
+			<id>asu-releases</id>
+			<url>https://gibson.asu.edu/nexus/content/repositories/releases</url>
 		</repository>
-	</distributionManagement>
-	<dependencies>
+		<snapshotRepository>
+			<id>asu-snapshots</id>
+			<url>https://gibson.asu.edu/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-exec</artifactId>
