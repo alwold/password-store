@@ -28,7 +28,8 @@
 			<id>asu-snapshots</id>
 			<url>https://gibson.asu.edu/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
-	</distributionManagement>	<dependencies>
+	</distributionManagement>	
+	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-exec</artifactId>
@@ -50,10 +51,10 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
-	 <dependency>
-	  <groupId>commons-beanutils</groupId>
-	  <artifactId>commons-beanutils</artifactId>
-	  <version>1.8.3</version>
-	 </dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
 	</dependencies>
 </project>
