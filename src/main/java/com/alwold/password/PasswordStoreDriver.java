@@ -11,15 +11,23 @@ public class PasswordStoreDriver implements Driver {
 	static {
 		try {
 			DriverManager.registerDriver(new PasswordStoreDriver());
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Class.forName("com.sybase.jdbc.SybDriver");
-			Class.forName("com.mysql.jdbc.Driver");
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver ");
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+			} catch (ClassNotFoundException e) {}
+			try {
+				Class.forName("com.sybase.jdbc.SybDriver");
+			} catch (ClassNotFoundException e){}
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {}
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			} catch (ClassNotFoundException e) {}
+			try {
+				Class.forName("net.sourceforge.jtds.jdbc.Driver");
+			} catch (ClassNotFoundException e) {}
 		} catch (SQLException ex) {
 			ex.printStackTrace(System.out);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
 		}
 	}
 	
@@ -32,20 +40,15 @@ public class PasswordStoreDriver implements Driver {
 	}
 
 	public Connection connect(String url, Properties info) throws SQLException {
+		info = (Properties)info.clone();
 		url = url.replace(":pwstore:", ":");
 		try {
 			String password = info.getProperty("password");
 			String[] saNames = password.split("/");
-			PasswordSafePasswordStore store = new PasswordSafePasswordStore();
+			PasswordStore store = PasswordStoreFactory.getPasswordStore();
 			password = store.getPassword(saNames[1], saNames[0]);
 			info.setProperty("password", password);
-			return ((Driver) Class.forName(info.getProperty("realDriver")).newInstance()).connect(url, info);
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
+			return DriverManager.getConnection(url, info);
 		} catch (PasswordStoreException e) {
 			throw new RuntimeException(e);
 		}
