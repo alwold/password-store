@@ -11,18 +11,13 @@ public class PasswordStoreDriver implements Driver {
 	static {
 		try {
 			DriverManager.registerDriver(new PasswordStoreDriver());
-			//TODO Register each driver with the driver manager?
-			DriverManager.registerDriver((Driver) Class.forName("oracle.jdbc.driver.OracleDriver").newInstance());
-			DriverManager.registerDriver((Driver) Class.forName("com.sybase.jdbc.SybDriver").newInstance());
-			DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-			DriverManager.registerDriver((Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver ").newInstance());
-			DriverManager.registerDriver((Driver) Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance());
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName("com.sybase.jdbc.SybDriver");
+			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver ");
+			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 		} catch (SQLException ex) {
 			ex.printStackTrace(System.out);
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -39,7 +34,6 @@ public class PasswordStoreDriver implements Driver {
 	public Connection connect(String url, Properties info) throws SQLException {
 		url = url.replace(":pwstore:", ":");
 		try {
-			// TODO Do we need the service and account fields for anything other than getting the password?
 			String password = info.getProperty("password");
 			String[] saNames = password.split("/");
 			PasswordSafePasswordStore store = new PasswordSafePasswordStore();
