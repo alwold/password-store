@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import javax.swing.Icon;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -64,12 +65,14 @@ public class PasswordSafePasswordStore implements PasswordStore {
 						field.requestFocusInWindow();
 					}
 				};
-				optionPane.createDialog(null, "PasswordSafe login").setVisible(true);
+				JDialog dialog = optionPane.createDialog(null, "PasswordSafe login");
+				dialog.setVisible(true);
 				if ((Integer) optionPane.getValue() < 0) {
 					throw new PasswordStoreException("No password entered");
 				} else {
 					masterPassword = new String(field.getPassword());
 				}
+				dialog.dispose();
 			}
 			sb.append(masterPassword);
 			PwsFile file = PwsFileFactory.loadFile(passwordSafeFile, sb);
