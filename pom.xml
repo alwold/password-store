@@ -19,6 +19,9 @@
 			</plugin>
 		</plugins>
 	</build>
+	<scm>
+		<connection>scm:git:ssh://git@github.com:alwold/password-store.git</connection>
+	</scm>
 	<distributionManagement>
 		<repository>
 			<id>asu-releases</id>
