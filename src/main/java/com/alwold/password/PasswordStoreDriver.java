@@ -48,7 +48,8 @@ public class PasswordStoreDriver implements Driver {
 			PasswordStore store = PasswordStoreFactory.getPasswordStore();
 			password = store.getPassword(saNames[1], saNames[0]);
 			info.setProperty("password", password);
-			return DriverManager.getConnection(url, info);
+			Driver driver = DriverManager.getDriver(url);
+			return driver.connect(url, info);
 		} catch (PasswordStoreException e) {
 			throw new RuntimeException(e);
 		}
