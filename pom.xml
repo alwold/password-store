@@ -20,7 +20,7 @@
 		</plugins>
 	</build>
 	<scm>
-		<connection>scm:git:ssh://git@github.com:alwold/password-store.git</connection>
+		<connection>scm:git:git@github.com:alwold/password-store.git</connection>
 	</scm>
 	<distributionManagement>
 		<repository>
