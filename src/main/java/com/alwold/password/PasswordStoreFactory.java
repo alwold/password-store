@@ -10,7 +10,7 @@ import java.util.Map;
 public class PasswordStoreFactory {
 	private static Map<String, PasswordStore> instances = new HashMap<String, PasswordStore>();
 	private static PasswordStore instance;
-	
+
 	public static synchronized PasswordStore getPasswordStore() {
 		if (instance == null) {
 			instance = new PasswordSafePasswordStore();

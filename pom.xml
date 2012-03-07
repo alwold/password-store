@@ -30,7 +30,7 @@
 			<id>asu-snapshots</id>
 			<url>https://gibson.asu.edu/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
-	</distributionManagement>	
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

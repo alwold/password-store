@@ -30,7 +30,7 @@ public class PasswordStoreDriver implements Driver {
 			ex.printStackTrace(System.out);
 		}
 	}
-	
+
 	public boolean acceptsURL(String url) throws SQLException {
 		if (url.startsWith("jdbc:pwstore:")) {
 			return true;
@@ -65,12 +65,12 @@ public class PasswordStoreDriver implements Driver {
 
 	public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) throws SQLException {
 		return new DriverPropertyInfo[]{
-			new DriverPropertyInfo("user", info.getProperty("user")), 
+			new DriverPropertyInfo("user", info.getProperty("user")),
 			new DriverPropertyInfo("password", info.getProperty("password"))};
 	}
 
 	public boolean jdbcCompliant() {
 		return false;
 	}
-	
+
 }
